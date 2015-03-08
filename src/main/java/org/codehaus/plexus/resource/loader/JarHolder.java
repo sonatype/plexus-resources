@@ -123,16 +123,19 @@ public class JarHolder
     {
         Hashtable allEntries = new Hashtable( 559 );
 
-        Enumeration all = theJar.entries();
-
-        while ( all.hasMoreElements() )
+        if ( theJar != null )
         {
-            JarEntry je = (JarEntry) all.nextElement();
+            Enumeration all = theJar.entries();
 
-            // We don't map plain directory entries
-            if ( !je.isDirectory() )
+            while ( all.hasMoreElements() )
             {
-                allEntries.put( je.getName(), this.urlpath );
+                JarEntry je = (JarEntry) all.nextElement();
+
+                // We don't map plain directory entries
+                if ( !je.isDirectory() )
+                {
+                    allEntries.put( je.getName(), this.urlpath );
+                }
             }
         }
         return allEntries;
